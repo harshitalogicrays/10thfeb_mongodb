@@ -63,3 +63,19 @@ db.employee.find().count()
    db.employee.find({empid:1001},{ename:true,salary:1 , _id:false})
 
     db.employee.distinct('salary') 
+
+ db.employee.find({},{ename:true,salary:1 , _id:false}).limit(2)
+ db.employee.find({},{ename:true,salary:1 , _id:false}).skip(1).limit(1)
+
+ db.employee.find({},{ename:true,salary:1 , _id:false}).sort({salary:1}) =>asc
+ db.employee.find({},{ename:true,salary:1 , _id:false}).sort({salary:-1}) => desc 
+ db.employee.find({},{ename:true,salary:1 , _id:false}).sort({ename:1})
+
+    ///////////////////
+
+    $exists ,$type , $size,
+    $all , $elemMatch
+    update 
+    delete 
+    import and export  - json file 
+
