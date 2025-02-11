@@ -1,0 +1,51 @@
+nodejs - 
+MySQL - CRUD 
+create table 
+insert 
+select (Fetch)
+update 
+delete 
+
+frontend - reactjs 
+backend - nodejs + expressjs 
+database  - where we keep our website data 
+
+SQL - structured query language - MySQL 
+id, name, password,email,address ,mobile
+schema fixed 
+relational database management system - tables 
+
+Student                            course 
+id (PK)                               id (PK) 
+name                                 name 
+email                                  desc 
+mobile
+courseId (FK)
+
+NoSQL  -  No SQL 
+schema flexible 
+BSON - Binary JSON 
+
+show dbs 
+show databases 
+
+create and switch to new databse - use dbname
+db or db.getName() -  returns current-database
+db.dropDatabase()
+
+collection create - 
+db.createCollection("student")
+show collections  or db.getCollectionNames()
+db.dummy.renameCollection("important")
+db.important.drop()
+
+insert - 
+db.collectionname.insertOne({})
+db.collectionname.insertMany([{},{},{}])
+
+db.student.insertOne({name:"Ram",lname:"Sharma",age:20,isActive:true,isMarried:null})
+
+db.student.find()
+==================================
+insertMany()
+find()

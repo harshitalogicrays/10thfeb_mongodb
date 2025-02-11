@@ -1,0 +1,49 @@
+insert - 
+db.collectionname.insertOne({})
+db.collectionname.insertMany([{},{},{}])
+
+db.student.insertOne({name:"Ram",lname:"Sharma",age:20,isActive:true,isMarried:null})
+
+db.student.find()
+==========================================================================
+db.createCollection("employee")
+
+db.employee.insertOne({ename:"ivan",empid:1001,salary:40000,isActive:true})
+
+db.employee.insertMany([
+    {ename:"peter",empid:1002,salary:30000,city:"pune",degination:"manager"},
+    {ename:"walter",salary:90000,city:"Delhi",designation:"CEO"},
+    {ename:"olivia",salary:70000,city:"ahmedbad"}
+    ])
+ db.employee.insertOne({ename:"john",empid:1011,city:'pune',salary:40000,isActive:true})
+
+ordered insert - 
+db.employee.insertMany([
+    {ename:"black",salary:65000,city:"kanpur",designation:"Tester"},
+    {ename:"reha",empid:1010,salary:3000,degination:"jr. developer",_id: ObjectId('67ab23dbe0701a5f0c4d7943')},
+    {ename:"olive",salary:50000,city:"jaipur"}
+    ])
+
+db.employee.insertMany([
+    {ename:"black",salary:65000,city:"kanpur",designation:"Tester"},
+    {ename:"reha",empid:1010,salary:3000,degination:"jr. developer",_id: ObjectId('67ab23dbe0701a5f0c4d7943')},
+    {ename:"olive",salary:50000,city:"jaipur"}
+    ] ,{ordered:false})
+
+/////////////////////////////////////////////////
+read operation - 
+find() - db.employee.find()
+db.employee.find().count()
+ db.employee.findOne()
+
+ db.employee.find({filter })
+ db.employee.find({ename:'peter'})
+ db.employee.find({city:'pune'})
+
+ db.employee.find({salary:30000})
+ db.employee.find({salary:{$eq:30000} })
+ db.employee.find({salary:{$gt:40000} })
+ db.employee.find({salary:{$in:[40000,70000,30000]} })
+ db.employee.find({salary:{$nin:[40000,70000,30000]} })
+
+ logical operators  - 
