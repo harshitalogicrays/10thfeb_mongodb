@@ -15,7 +15,7 @@ db.employee.insertMany([
     {ename:"walter",salary:90000,city:"Delhi",designation:"CEO"},
     {ename:"olivia",salary:70000,city:"ahmedbad"}
     ])
- db.employee.insertOne({ename:"john",empid:1011,city:'pune',salary:40000,isActive:true})
+ db.employee.insertOne({ename:"rose",empid:1011,city:'pune',salary:"40000",isActive:true})
 
 ordered insert - 
 db.employee.insertMany([

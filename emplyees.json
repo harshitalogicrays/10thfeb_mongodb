@@ -1,0 +1,94 @@
+[
+    {
+        "_id": {
+            "$oid": "67ab2330e0701a5f0c4d7942"
+        },
+        "ename": "ivan",
+        "empid": 1001,
+        "salary": 40000,
+        "isActive": true
+    },
+    {
+        "_id": {
+            "$oid": "67ab23dbe0701a5f0c4d7943"
+        },
+        "ename": "peter",
+        "empid": 1002,
+        "salary": 30000,
+        "city": "pune",
+        "degination": "manager"
+    },
+    {
+        "_id": {
+            "$oid": "67ab23dbe0701a5f0c4d7944"
+        },
+        "ename": "walter",
+        "salary": 90000,
+        "city": "Delhi",
+        "designation": "CEO"
+    },
+    {
+        "_id": {
+            "$oid": "67ab23dbe0701a5f0c4d7945"
+        },
+        "ename": "olivia",
+        "salary": 70000,
+        "city": "ahmedbad"
+    },
+    {
+        "_id": {
+            "$oid": "67ab24d6e0701a5f0c4d7946"
+        },
+        "ename": "john",
+        "empid": 1011,
+        "city": "pune",
+        "salary": 40000,
+        "isActive": true
+    },
+    {
+        "_id": {
+            "$oid": "67ab25f3e0701a5f0c4d7947"
+        },
+        "ename": "reha",
+        "empid": 1010,
+        "salary": 3000,
+        "degination": "jr. developer"
+    },
+    {
+        "_id": {
+            "$oid": "67ab264be0701a5f0c4d7949"
+        },
+        "ename": "black",
+        "salary": 65000,
+        "city": "kanpur",
+        "designation": "Tester"
+    },
+    {
+        "_id": {
+            "$oid": "67ab264be0701a5f0c4d794a"
+        },
+        "ename": "olive",
+        "salary": 50000,
+        "city": "jaipur"
+    },
+    {
+        "_id": {
+            "$oid": "67ac74d38c4438c65a4d7942"
+        },
+        "ename": "john",
+        "empid": 1011,
+        "city": "pune",
+        "salary": 40000,
+        "isActive": true
+    },
+    {
+        "_id": {
+            "$oid": "67ac74e98c4438c65a4d7943"
+        },
+        "ename": "rose",
+        "empid": 1011,
+        "city": "pune",
+        "salary": "40000",
+        "isActive": true
+    }
+]
