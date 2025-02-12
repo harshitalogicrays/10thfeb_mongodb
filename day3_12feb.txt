@@ -22,8 +22,7 @@ db.products.find({tags:{$size:2}},{tags:1})
 
 db.products.find({tags:{$all : ['furniture','sofas']}},{tags:1})
 
-Embeded Document -
-db.products.find({},{'meta.barcode':1})
+Embeded Document - db.products.find({},{'meta.barcode':1})
 
 db.products.find({reviews:{$elemMatch : {rating:2}}},{title:1})
-db.products.find({reviews:{$elemMatch : {rating:2, comment: "Very unhappy with my purchase!"}}},{title:1})
+db.products.find({reviews:{$elemMatch : {rating:2,comment:"Very unhappy with my purchase!"}}},{title:1})
