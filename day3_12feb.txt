@@ -26,3 +26,34 @@ Embeded Document - db.products.find({},{'meta.barcode':1})
 
 db.products.find({reviews:{$elemMatch : {rating:2}}},{title:1})
 db.products.find({reviews:{$elemMatch : {rating:2,comment:"Very unhappy with my purchase!"}}},{title:1})
+
+
+///update - 
+updateOne 
+updateMany 
+
+db.products.updateOne({title:'Eggs'},{$set:{price:3000} })
+
+ db.products.updateOne({title:'Eggs'},{$set:{stock:100,description:'good product'} })
+
+db.products.updateOne({title:'Eggs'},{$set:{stock:0,newField:"new field"}})
+
+db.products.updateOne({title:'Eggs22'},{$set:{stock:0,newField:"new field"}},{upsert:true})
+
+db.products.updateOne({title:'Eggs22'},{$unset:{stock:1}}) 
+
+ db.products.updateMany({category:'groceries'},{$set:{category:'grocery',mrp:100,brand:'safal'}})
+
+  db.products.replaceOne({title:'Eggs22'},{stock:1,price:1000,title:'egg'})
+
+  db.products.deleteOne({title:'egg'})
+
+  db.products.deleteOne({title:'egg'})
+
+  db.products.deleteMany({category:'grocery'})
+
+   db.products.updateOne({_id:ObjectId('67ac76fe2bc6a5b27c412b05')},{$push :{tags:'cupboard'} })
+
+db.products.updateOne({_id:ObjectId('67ac76fe2bc6a5b27c412b05')},{$push :{reviews:{rating:4,comment:'very bad'}} })
+
+db.products.updateOne({_id:ObjectId('67ac76fe2bc6a5b27c412b05')},{$pop :{'reviews':1} })
