@@ -18,3 +18,24 @@ db.users.getIndexes()
 // db.users.getIndexes()
 // db.users.createIndex({"company.email":1},{unique:true})
 db.users.getIndexes()
+
+
+db.users.aggregate([])
+$match 
+$project 
+$skip 
+$limit
+$sort 
+$push 
+$all 
+etc...
+
+
+db.users.aggregate([
+    {
+        $match:{gender:'male'}
+    } ,
+    {$count : 'string'}
+])
+
+mongodb atlas - cloud 
