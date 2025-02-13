@@ -1,1 +1,20 @@
 mongoimport usersdata.json -d mongodb_practice -c users --jsonArray
+
+db.users.getIndexes()
+
+// db.users.getIndexes()
+
+// db.users.find({gender:"female"})
+// db.users.find({gender:"female"}).explain()
+// db.users.find({gender:"female"}).explain('executionStats')
+
+// db.users.find().sort({age:1}).explain('executionStats')
+
+// db.users.createIndex({age:1})
+// db.users.createIndex({gender:-1})
+// db.users.getIndexes()
+// db.users.find({gender:"female"}).explain('executionStats')
+// db.users.dropIndex("age_1")
+// db.users.getIndexes()
+// db.users.createIndex({"company.email":1},{unique:true})
+db.users.getIndexes()
