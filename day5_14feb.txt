@@ -1,0 +1,127 @@
+db.users.aggregate([
+    {
+        $match:{gender:'male'}
+    } ,
+    {$count : 'Total Male Users'}
+])
+
+
+[
+  {
+    $match:{
+      gender:"female"
+    }
+  },
+  {$project: {
+    name:1,age:1
+  }}
+]
+
+[
+  {
+    $match:{
+      gender:"female"
+    }
+  },
+  {$project: {
+    name:1,age:1
+  }},
+  {
+    $limit:2
+  }
+]
+
+///////////////////////
+total no of user whose company country is USA.
+[{
+  $match:{
+    'company.location.country':'USA'
+  }},
+  {$count:"Total USA company users"}
+]
+
+///////////////
+find the oldest user .
+[
+  {$sort:{age:-1}},
+  {$limit: 1}
+]
+
+//////////////////////////////////////////////
+find the youngest user .
+[
+  {$sort:{age:1}},
+  {$limit: 1}
+]
+
+///////////////////////////////////////
+
+find the seconds youngest user .
+[
+  {$sort:{age:1}},
+  {$skip:1},
+  {$limit: 1}
+]
+
+////////////////////
+random document -
+[
+{
+  $sample: {
+    size: 3
+  }
+}
+]
+
+/////////////////////////////
+
+
+how many users have 'enim' as one of their tags.
+[
+  {$match: {
+    tags:'enim'
+  }
+  },
+  {$count:"Users with enim tag"}
+]
+
+/////////////////////////////////////////////////////
+name and age of the users who are active users.
+[{
+  $match:{
+    isActive:true
+  }
+},
+ {$project:{name:1,age:1}}]
+
+
+/////////////////////////////////////////////////////
+name and age of the users who are inactive users and have "id" as their tag.
+[{
+  $match:{
+    isActive:false, tags:'id'
+  }
+},
+ {$project:{name:1,age:1}}]
+
+ ////////////////////////////////////////////
+ how many users have "est" as their second tag.
+ [{
+  $match:{
+   "tags.1":'est'
+  }
+},
+ {$count:"tags with est as second"}
+]
+
+///////////////////////////////////////////////////
+find  users who have both enim and id as their tags.
+[{
+  $match:{
+   tags:{$all:['enim','id']}
+  }
+}
+]
+
+////////////////////////////////////////////////////////
+$group  - 
