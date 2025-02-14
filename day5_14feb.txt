@@ -144,26 +144,21 @@ find the total no of male and female users.
    }}
 ]
 
-//////////////////////////////////////////////////////////
+//////////////////////////////////
 Find the total users group by their age 
  [
    {$group: {
      _id: "$age",
      "Count":{
        $sum:1
-     }
-   }}
+     } }}
 ]
-///////////////////////////////////////////////////////
+//////////////////////////////////
 list all unqiue eyecolors
  [
    {
      $group: {
-       _id: "$eyeColor",
-       
-     }
-   }
-]
+       _id: "$eyeColor",  }}]
 
  [
    {
@@ -171,37 +166,28 @@ list all unqiue eyecolors
        _id: "$eyeColor",
        "totalUsers":{
          $sum:1
-       }
-     }
-   }
-]
+       }  }  }]
 
-/////////////////////////////////////////////////////////////////////
-
+//////////////////////////////////
 calculate the no of active and inactive users and their average age group by gender
 
- [
-   {
+ [{
      $group: {
        _id: {gender:"$gender",isActive:"$isActive"},
      	"avg age":{$avg:"$age"},
        "totalUsers":{$sum:1}
-     }
-   }
+     } }
 ]
-
-//////////////////////////////////////////////////////
+//////////////////////////////////
 find total users as per company country 
  [
    {
      $group: {
        _id:"$company.location.country",
        "totalUSers":{$sum:1}
-     }
-   }
-]
+     } }]
 
-/////////////////////////////////////////////////////////////////
+//////////////////////////////////
 which country has the highest no of registered users?
  [
      {
