@@ -1,0 +1,319 @@
+list name of the users by their eye color.
+[
+  {
+     $group: {
+       _id: "$eyeColor",  
+     	users:{$push:"$name"}
+     }}]
+
+
+[{
+     $group: {
+       _id: "$eyeColor",  
+     	users:{$addToSet:"$name"}
+     }},]
+
+////////////////////////////////////////////
+unwind array - $unwind 
+
+unwind the tags array and count the occureance of each tag.
+
+[
+  {
+    $unwind:"$tags"
+  },
+  {$group: {
+    _id: "$tags",
+    "count": {
+      $sum: 1
+    }
+  }}]
+
+////////////////////////////////////////
+first tag of each user.
+[
+  {$project:{
+   "firsttag" :{$arrayElemAt:["$tags",0]}
+  }}  
+]
+
+///////////////////////////////////////
+regular expression 
+
+name starts with "A"
+[  {
+    $match: {
+      name:{$regex:/^A/}
+    } }  ,
+  {$project: {
+    name:true
+  }}]
+
+
+[{
+    $match: {
+      name:{$regex:/^A/ ,$options:"i"}
+    }  }  ,
+  {$project: {
+    name:true
+  }}]
+
+
+[{
+    $match: {
+      name:{$regex:/Ay/ ,$options:"i"}
+    } }  ,
+  {$project: { name:true}}]
+
+///////////////////////////////////////////////////
+convert string into date 
+
+[  {
+    $project: {
+      "Date":{$toDate:"$registered"}
+    } }]
+
+//////////////////////////////////////////////
+fetch year only 
+[
+  {
+    $project: {
+      "year" :{$year : {$toDate:"$registered"}}
+    }
+  }
+]
+
+///////////////////////////////////////
+fetch month only 
+
+[
+  {
+    $project: {
+      "month" :{$month : {$toDate:"$registered"}}
+    }
+  }
+]
+
+//////////////////////////////////////////////////////////////////
+
+how many users registered in 2016.
+
+
+[
+  {
+    $project: {
+      "year" :{$year : {$toDate:"$registered"}}
+    }
+  },
+  {$match:{
+    "year":2016
+  }},
+  {$count:"User Registered in 2016"}
+]
+
+before 2016 -
+
+[
+  {
+    $project: {
+      "year" :{$year : {$toDate:"$registered"}}
+    }
+  },
+  {$match:{
+    "year":{$lt:2016}
+  }},
+  {$count:"User Registered in 2016"}
+]
+/////////////////////////////////////////////////
+fetch time only -
+
+[
+  {
+    $project: {
+     "time" :{
+       "$dateToString" :{"format":"%H:%M:%S","date":{
+         $toDate:"$registered"
+       }}
+     }}}
+]
+
+//fetch date only 
+
+[
+  {
+    $project: {
+     "time" :{
+       "$dateToString" :{"format":"%Y-%m-%d","date":{
+         $toDate:"$registered"
+       }}
+     }}
+  }
+]
+
+//////////////////////////////////////////////////////////
+
+what is the year of registertion of Aurelia Gonzales
+
+[
+  {$match:{
+    name:"Aurelia Gonzales"
+  }},
+  {$project:{
+    "year":{$year:{$toDate:"$registered"}}
+  }}
+]
+
+//////////////////////////////////////////////////////////////
+
+which month has the highest number of registration
+
+[
+  {
+    $project: {
+      "month" :{$month : {$toDate:"$registered"}}
+    }
+  },
+  {
+    $group: {
+      _id: "$month",
+      count: {
+        $sum: 1
+      }
+    }
+  },
+  {$sort:{count:-1}},
+  {$limit:1}
+]
+
+
+//////////////////////////////////////////////////////////////////
+fetch month and display name of month instead of number.
+[
+  {
+    $project: {
+      "month" :{$month : {$toDate:"$registered"}}
+    }},
+  {
+    $addFields :{
+        "Month" :{
+            $arrayElemAt : [
+                ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"] ,
+                "$month"]
+        }
+    }
+  }
+  ]
+
+  [
+  {
+    $project: {
+      "month" :{$month : {$toDate:"$registered"}}
+    }},
+  {
+    $addFields :{
+        "Month" :{
+            $arrayElemAt : [
+                ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"] ,
+                { $subtract :["$month",1]}]
+        }
+    }
+  }
+  ]
+
+  ////////////////////////////////////////////////////////////////////////
+
+  $lookup - 
+
+db.books.aggregate([
+    {
+        $lookup :{
+                from :"authors"
+                localField :"author_id",
+                foreignField:"_id",
+                as:"author_details"
+        }
+    }
+])
+
+
+Retreive the titles of all books along with their author name
+[
+  {$lookup: {
+    from: "authors",
+    localField: "author_id",
+    foreignField: "_id",
+    as: "author_details"
+  }},
+  {$unwind:"$author_details"},
+  {$project: {
+    title:1,
+    "author_name":"$author_details.name"
+  }}
+]
+
+//////////////////
+count the number of books written by each author 
+[
+  {$lookup: {
+    from: "authors",
+    localField: "author_id",
+    foreignField: "_id",
+    as: "author_details"
+  }},
+  {$unwind:"$author_details"},
+  {
+    $group: {
+      _id: "$author_details.name",
+      "bookcount": {
+        $sum: 1
+      }
+    }
+  }
+]
+
+///////////////////////////////////////////
+list books of authors born after 1900
+[
+  {$lookup: {
+    from: "authors",
+    localField: "author_id",
+    foreignField: "_id",
+    as: "author_details"
+  }},
+  {$unwind:"$author_details"},
+  {
+    $match: {
+      'author_details.birth_year':{"$gt":1900}
+    }
+  },
+  {$project: {
+    "author_name":"$author_details.name",
+    title:1
+  }}
+]
+
+////////////////
+books by authors of Classic genre
+[
+  {
+    $match: {
+      genre:"Classic"
+    }
+  },
+  {$lookup: {
+    from: "authors",
+    localField: "author_id",
+    foreignField: "_id",
+    as: "author_details"
+  }},
+  {$unwind:"$author_details"},
+  {$project: {
+    title:1,
+    "author_name":"$author_details.name",
+    genre:1
+  }}
+]
+
+///////////////////////////////////////////////////
+
+mongoose  - expressjs 

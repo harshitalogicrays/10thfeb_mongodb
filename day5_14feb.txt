@@ -210,3 +210,18 @@ list of the 1 most comman favoriteFruit amoung users.
      {$sort:{total:-1}},
      {$limit:1}  
 ]
+
+
+/////////////////////////////
+
+
+[
+  {
+    $match: {
+      "company.phone":{$regex:/\+1 \(940/ ,$options:"i"}
+    }
+  }  ,
+  {$count:"users"}
+]
+
+///////////////////////////////////////////////
